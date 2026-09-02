@@ -34,99 +34,136 @@ samp <- as(sample_data(GlobalPatterns), "data.frame")    # pulls out the sample 
 ## Main analysis
 
 ```{r main}
-shannon <- vegan::diversity(t(otu), index = "shannon")
-df <- data.frame(sample = names(shannon), shannon = as.numeric(shannon),
-                  type = samp[names(shannon), "SampleType"])
+shannon <- vegan::diversity(t(otu), index = "shannon")     # compute Shannon diversity for every sample (t() flips otu so samples are rows, taxa are columns -- vegan expects samples as rows)
 
-soil  <- df$shannon[df$type == "Soil"]
-feces <- df$shannon[df$type == "Feces"]
-observed_diff <- mean(soil) - mean(feces)
+df <- data.frame(sample = names(shannon), shannon = as.numeric(shannon),  # build a tidy data frame: one row per sample
+                  type = samp[names(shannon), "SampleType"])              # attach each sample's SampleType (Soil/Feces/etc.) by matching sample names
 
-cat("Soil mean:", mean(soil), " Feces mean:", mean(feces), "\n")
-wilcox.test(soil, feces)
+soil  <- df$shannon[df$type == "Soil"]    # pull out just the Shannon values for Soil samples
+feces <- df$shannon[df$type == "Feces"]   # pull out just the Shannon values for Feces samples
+
+observed_diff <- mean(soil) - mean(feces)  # the actual effect size: how much higher soil diversity is than feces diversity
+
+cat("Soil mean:", mean(soil), " Feces mean:", mean(feces), "\n")  # print both group means to eyeball before the formal test
+
+wilcox.test(soil, feces)   # nonparametric test comparing the two groups -- appropriate here since n is tiny (3 vs 4), too small to assume normality
+
+#plot shannon
+boxplot_shannon <- boxplot(soil, feces, names = c("Soil", "Feces"),
+        ylab = "Shannon diversity", main = "Soil vs Feces Diversity",
+        col = c("tan", "lightblue"))
+stripchart(list(Soil = soil, Feces = feces), vertical = TRUE,
+           method = "jitter", pch = 19, add = TRUE)
+boxplot_shannon
 ```
 
 ## Control 1: Known answer
 
-A perfectly even community of 4 taxa has Shannon = ln(4), by definition —
-true regardless of this pipeline.
+A perfectly even community of 4 taxa has Shannon = ln(4) (Shannon diversity is maximized when a community is perfectly even, and for N equally-abundant categories, that maximum value is always ln(N)). Here we check the pipeline
+against a fact we can prove on paper, so any bug in the diversity calculation itself would show up here first.
 
 ```{r known-answer}
-cat("Expected: ln(4) =", log(4), "\n")
-cat("Pipeline gives: ", vegan::diversity(rep(10, 4)), "\n")
+cat("Expected: ln(4) =", log(4), " | Pipeline gives:", vegan::diversity(rep(10, 4)), "\n")  # compare the math answer (log(4), computed independently of vegan) side-by-side with what vegan::diversity() returns for an even 4-taxa community (10,10,10,10)
 ```
 
-## Control 2: Invariant
+## Control 2: Invariant - has to be true
 
-Shannon diversity must be non-negative for every sample, no matter what the
-data say.
+Shannon diversity must be non-negative for every sample. It's checking a property that has to
+hold true regardless of what the actual biology turns out to be, since Shannon entropy can never be negative by definition.
 
 ```{r invariant}
-all(shannon >= 0)
+all(shannon >= 0)   # TRUE only if every sample's Shannon value is >= 0 -- checks all 26 samples at once, not just soil/feces
 ```
 
 ## Control 3: Negative control
+
+A negative control checks that a result disappears once you break the thing
+that's supposedly causing it -- here, that means scrambling which label
+goes with which sample and confirming the soil/feces difference goes away.
 
 **Destroyed:** which label (Soil/Feces) is attached to which diversity
 value. **Preserved:** the real diversity values themselves. Shuffle labels
 1000 times, build a null distribution.
 
 ```{r negative-control}
-sf <- df[df$type %in% c("Soil", "Feces"), ]
-null_diffs <- replicate(1000, {
-  shuffled <- sample(sf$type)
-  mean(sf$shannon[shuffled == "Soil"]) - mean(sf$shannon[shuffled == "Feces"])
+sf <- df[df$type %in% c("Soil", "Feces"), ]   # subset down to just the 7 soil+feces rows (drops Mock/Skin/Tongue/etc.)
+
+null_diffs <- replicate(1000, {                                              # repeat the whole block 1000 times, collecting each result. Note that there are really only like 35 different possible ways to relabel 7 samples
+  shuffled <- sample(sf$type)                                               # randomly reshuffle which label (Soil/Feces) goes with which row -- breaks the real pairing
+  mean(sf$shannon[shuffled == "Soil"]) - mean(sf$shannon[shuffled == "Feces"])  # compute the same statistic as the main analysis, but on fake/shuffled labels
 })
-cat("Null mean:", mean(null_diffs), "(should be ~0)\n")
-cat("Empirical p-value:", mean(abs(null_diffs) >= abs(observed_diff)), "\n")
-hist(null_diffs, main = "Null distribution (labels scrambled)")
-abline(v = observed_diff, col = "red", lwd = 2)
+
+cat("Null mean:", mean(null_diffs), "(should be ~0)\n")   # average of all 1000 fake differences -- should hover near 0 if there's really no effect once labels are randomized
+
+cat("Empirical p-value:", mean(abs(null_diffs) >= abs(observed_diff)), "\n")  # what fraction of the 1000 fake differences were as extreme as (or more extreme than) our real observed difference
+
+hist(null_diffs, main = "Null distribution (labels scrambled)")   # plot the 1000 fake differences as a histogram
+abline(v = observed_diff, col = "red", lwd = 2)                   # draw a red vertical line at the real observed difference, so you can see where it falls relative to the null
 ```
 
 ## Control 4: Positive control
+
+A positive control is the mirror image of the negative control -- instead
+of destroying a real effect and checking it disappears, you plant a fake
+effect you know is there and check that your pipeline actually catches it.
 
 **Planted:** take one real feces sample, truncate it to its top 20 taxa
 (deliberately less diverse), and confirm the test finds that difference
 against the untouched full community.
 
 ```{r positive-control}
-base <- sort(otu[otu[, "M31Fcsw"] > 0, "M31Fcsw"], decreasing = TRUE)
-p_full <- base / sum(base)
+base <- sort(otu[otu[, "M31Fcsw"] > 0, "M31Fcsw"], decreasing = TRUE)   # grab one real feces sample's counts, drop zero-count taxa, sort most-to-least abundant
+
+p_full <- base / sum(base)   # convert counts to proportions -- the real, untouched community's abundance distribution
+
 p_trunc <- rep(0, length(base)); p_trunc[1:20] <- base[1:20]; p_trunc <- p_trunc / sum(p_trunc)
+# build a deliberately less-diverse version: start with all zeros, keep only the top 20 most abundant taxa's counts, zero out everything else, then renormalize to proportions
 
-A <- apply(rmultinom(5, 5000, p_full),  2, vegan::diversity)  # untouched
-B <- apply(rmultinom(5, 5000, p_trunc), 2, vegan::diversity)  # planted low-diversity
+A <- apply(rmultinom(5, 5000, p_full),  2, vegan::diversity)  # untouched: draw 5 synthetic samples (5000 reads each) from the full community, compute Shannon for each
+B <- apply(rmultinom(5, 5000, p_trunc), 2, vegan::diversity)  # planted low-diversity: same thing, but drawing from the truncated (top-20-only) community
 
-cat("Full mean:", mean(A), " Truncated mean:", mean(B), "\n")
-wilcox.test(A, B)
+cat("Full mean:", mean(A), " Truncated mean:", mean(B), "\n")   # compare average diversity between the two groups
+
+wilcox.test(A, B)   # test whether that planted difference is statistically detectable
 ```
 
 ## Control 5: Redundancy
 
-Same quantity, two ways: `vegan::diversity()` vs. a hand-written formula.
-They share the same input data and the same math definition — but not the
-same code.
+Computing Shannon diversity two ways: `vegan::diversity()` vs. a hand-written
+formula. They share the same input data and the same math definition — but
+not the same code, so a bug specific to one implementation (wrong axis,
+forgetting to drop zero counts, etc.) would show up as a mismatch here.
 
 ```{r redundancy}
 manual_shannon <- function(x) { p <- x[x > 0] / sum(x); -sum(p * log(p)) }
-cat("vegan:  ", vegan::diversity(otu[, "CL3"]), "\n")
-cat("manual: ", manual_shannon(otu[, "CL3"]), "\n")
+# hand-written Shannon formula: drop zero-count taxa, convert counts to proportions (p),
+# then compute -sum(p * log(p)) directly -- the textbook definition, no vegan involved
+
+cat("vegan:  ", vegan::diversity(otu[, "CL3"]), "\n")    # Shannon diversity for one real soil sample (CL3), via vegan's built-in function
+cat("manual: ", manual_shannon(otu[, "CL3"]), "\n")      # same sample, same math, computed by the from-scratch formula above
 ```
 
 ## Control 6: Order of magnitude
 
-Written before running anything above: soil diversity should be clearly higher than feces diversity, since soil habitats are generally far more microbially diverse than host-filtered gut communities — and both results (6.62 vs. 3.67) came out that way.
+Soil diversity should be clearly higher than feces diversity, since soil habitats are generally far more microbially diverse than host-filtered gut communities. The results (mean Shannon diversity: soil = 6.62, feces = 3.67, computed in the main analysis
+chunk above) show that soil samples do in fact have noticeably higher diversity than feces samples, matching what was expected going in.
 
 ## Control 7: Determinism
 
-```{r determinism}
-r1 <- vegan::diversity(t(otu[, c("CL3", "M31Fcsw")]))
-r2 <- vegan::diversity(t(otu[, c("CL3", "M31Fcsw")]))
-identical(r1, r2)
-```
+Running the same calculation twice and confirming the results are exactly
+identical. If they weren't, that would mean something in the pipeline
+depends on unseeded randomness or some other source of variability, which
+would undermine trust in every other result above.
 
-*(Run the whole `.Rmd` twice / on another machine to confirm fully —
-everything here is seeded.)*
+```{r determinism}
+r1 <- vegan::diversity(t(otu[, c("CL3", "M31Fcsw")]))   # compute Shannon diversity for two samples (one soil, one feces)
+r2 <- vegan::diversity(t(otu[, c("CL3", "M31Fcsw")]))   # run the exact same calculation again, from scratch
+identical(r1, r2)   # TRUE only if both runs produced exactly the same numbers, down to the last decimal
+```
+*This analysis script was developed with the assistance of Claude (Anthropic),
+which helped design the control structure, write and debug the R code, and
+explain the statistical/biological reasoning behind each step. All code was
+run and results verified before inclusion.*
 
 ## Environment
 
