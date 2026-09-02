@@ -355,13 +355,28 @@ display: none;
 </div>
 
 
-<blockquote>
-<p><strong>Data source:</strong> Caporaso, J.G., et al. (2011).
+<div id="repository" class="section level2">
+<h2>Repository</h2>
+<p><a href="https://github.com/taq-poly/Quintana_CBC26">github.com/taq-poly/Quintana_CBC26</a></p>
+</div>
+<div id="data-provenance" class="section level2">
+<h2>Data Provenance</h2>
+<ul>
+<li><strong>Source publication:</strong> Caporaso, J.G., et al. (2011).
 <em>Global patterns of 16S rRNA diversity at a depth of millions of
-sequences per sample.</em> PNAS 108: 4516–4522. Distributed as the
-<code>GlobalPatterns</code> example dataset in the <code>phyloseq</code>
-R package.</p>
-</blockquote>
+sequences per sample.</em> PNAS 108: 4516–4522.</li>
+<li><strong>What it is:</strong> 16S rRNA gene sequencing of 25
+environmental and human-associated samples plus mock communities.</li>
+<li><strong>How it got here:</strong> distributed as the
+<code>GlobalPatterns</code> example dataset bundled inside the
+<code>phyloseq</code> R/Bioconductor package — loaded directly via
+<code>data(GlobalPatterns)</code>, no external download or URL
+involved.</li>
+<li><strong>What this analysis uses:</strong> just the OTU count table
+and the <code>SampleType</code> metadata column, restricted to Soil
+(n=3) and Feces (n=4) samples for the main claim.</li>
+</ul>
+</div>
 <div id="claim" class="section level2">
 <h2>Claim</h2>
 <p>Soil samples have higher microbial diversity (Shannon index) than

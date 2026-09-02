@@ -9,11 +9,23 @@ knitr::opts_chunk$set(echo = TRUE)
 set.seed(42)
 ```
 
-> **Data source:** Caporaso, J.G., et al. (2011). *Global patterns of 16S rRNA
-> diversity at a depth of millions of sequences per sample.* PNAS 108:
-> 4516–4522. Distributed as the `GlobalPatterns` example dataset in the
-> `phyloseq` R package.
+## Repository
 
+[github.com/taq-poly/Quintana_CBC26](https://github.com/taq-poly/Quintana_CBC26)
+
+## Data Provenance
+
+- **Source publication:** Caporaso, J.G., et al. (2011). *Global patterns of
+  16S rRNA diversity at a depth of millions of sequences per sample.* PNAS
+  108: 4516–4522.
+- **What it is:** 16S rRNA gene sequencing of 25 environmental and
+  human-associated samples plus mock communities.
+- **How it got here:** distributed as the `GlobalPatterns` example dataset
+  bundled inside the `phyloseq` R/Bioconductor package — loaded directly via
+  `data(GlobalPatterns)`, no external download or URL involved.
+- **What this analysis uses:** just the OTU count table and the
+  `SampleType` metadata column, restricted to Soil (n=3) and Feces (n=4)
+  samples for the main claim.
 
 ## Claim
 
