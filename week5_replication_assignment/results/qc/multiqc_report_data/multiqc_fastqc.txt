@@ -1,5 +1,0 @@
-Sample	Filename	File type	Encoding	Total Sequences	Total Bases	Sequences flagged as poor quality	Sequence length	%GC	total_deduplicated_percentage	avg_sequence_length	median_sequence_length	basic_statistics	per_base_sequence_quality	per_sequence_quality_scores	per_base_sequence_content	per_sequence_gc_content	per_base_n_content	sequence_length_distribution	sequence_duplication_levels	overrepresented_sequences	adapter_content
-FBW1	FBW1.fastq.gz	Conventional base calls	Sanger / Illumina 1.9	1000000.0	72 Mbp	0.0	72.0	45.0	5.1417	72.0	72	pass	pass	pass	fail	fail	pass	pass	fail	fail	pass
-FBW2	FBW2.fastq.gz	Conventional base calls	Sanger / Illumina 1.9	1000000.0	72 Mbp	0.0	72.0	44.0	9.0809	72.0	72	pass	pass	pass	fail	warn	pass	pass	fail	fail	pass
-FU1	FU1.fastq.gz	Conventional base calls	Sanger / Illumina 1.9	1000000.0	72 Mbp	0.0	72.0	45.0	10.171137890752352	72.0	72	pass	pass	pass	fail	warn	pass	pass	fail	fail	pass
-FU2	FU2.fastq.gz	Conventional base calls	Sanger / Illumina 1.9	1000000.0	72 Mbp	0.0	72.0	43.0	30.94016249978766	72.0	72	pass	pass	pass	fail	warn	pass	pass	fail	warn	pass
