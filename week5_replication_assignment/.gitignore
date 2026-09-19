@@ -1,0 +1,8 @@
+data/
+results/salmon_index/
+results/quant/
+*.sra
+*.fastq
+*.fastq.gz
+.Rhistory
+.DS_Store

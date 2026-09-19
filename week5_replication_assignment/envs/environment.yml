@@ -1,0 +1,24 @@
+name: toxocara-deg
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - sra-tools=3.1.1
+  - seqtk=1.4
+  - fastqc=0.12.1
+  - multiqc=1.21
+  - salmon=1.10.3
+  - samtools=1.19
+  - r-base=4.3.*
+  - bioconductor-deseq2=1.42.0
+  - bioconductor-tximport=1.30.0
+  - bioconductor-apeglm=1.24.0
+  - r-jsonlite=1.8.8
+  - r-ggplot2=3.5.0
+  - r-pheatmap=1.0.12
+  - r-rcolorbrewer=1.1_3
+  - r-readr=2.1.5
+  - unzip
+  - wget
