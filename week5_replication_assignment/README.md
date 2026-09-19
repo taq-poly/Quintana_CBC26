@@ -32,39 +32,23 @@ research in veterinary parasitology.
 
 ## Why control vs. ivermectin only (not moxidectin too)?
 
-The source study profiled three conditions (control, ivermectin,
-moxidectin), each n=3. Restricting this reanalysis to a single two-group
-comparison (control vs. ivermectin) halves the download/compute burden
+The source study profiled three conditions (control, ivermectin, moxidectin), each n=3. This reanalysis further subsets to n=2 per group (the two smallest/fastest replicates of each condition) and drops moxidectin entirely, to keep full-depth downloads practical on a laptop,
 while still directly answering "does ivermectin change the larval
-transcriptome" -- the paper's central question. Adding moxidectin back in
-would only require adding 3 more rows to `config/samples.tsv` and
-switching the DESeq2 design to a 3-level factor.
+transcriptome".
 
 ## Full read depth -- no subsampling
 
 This pipeline downloads **every read of every sample** -- no
 subsampling, no truncation -- via `prefetch` + `fasterq-dump`,
-matching the source study's depth exactly (~11.5 GB total, 17-54
-million read pairs per sample). Samples are fetched one at a time.
+matching the source study's depth exactly (~7.2 GB total across the 4 selected samples, 17-40 million read pairs each).
 
 ```bash
 bash run_all.sh
 ```
 
 This step is slow, and that is a direct consequence of the real data
-volume involved, not an inefficiency in the script: ~11.5 GB of real
-sequencing data has to be transferred and decompressed. In our own
-test run on a laptop over a home internet connection, individual
-samples took roughly 2-20 minutes each to fetch and extract (larger
-samples, e.g. the 54-million-read-pair control replicate, took longer
-than smaller ones), with total time for all 6 samples taking well
-over an hour. On research compute infrastructure (multi-Gbps
-networking, more CPU cores for `fasterq-dump`'s multi-threaded
-extraction, faster local storage), the same download would be
-expected to complete considerably faster, since both the network
-transfer and the extraction step scale with that hardware -- though
-we have not tested this ourselves and report it as a general
-expectation, not a measured result.
+volume involved, not an inefficiency in the script: ~7.2 GB of real
+sequencing data has to be transferred and decompressed. 
 
 `fasterq-dump -e $THREADS` controls how many CPU threads are used for
 extraction; set the `THREADS` environment variable to roughly your
@@ -104,7 +88,7 @@ bash run_all.sh
 
 | Step | Script | What it does |
 |---|---|---|
-| 1 | `scripts/01_fetch_data.sh` | Download reference transcriptome + download SRA reads (paired-end) + subsample |
+| 1 | `scripts/01_fetch_data.sh` | Download reference transcriptome + download SRA reads (paired-end) |
 | 2 | `scripts/02_qc.sh` | FastQC per sample (both mates) + MultiQC summary |
 | 3 | `scripts/03_quantify.sh` | Build Salmon index; quantify each sample (paired-end mode) |
 | 4 | `scripts/04_deseq2.R` | tximport + DESeq2 DE test, tables, plots |
@@ -121,11 +105,9 @@ paper's Table 1 exactly, confirming correct sample identity:
 | sample_id | condition | SRA experiment (SRX) | SRA run (SRR) | read pairs |
 |---|---|---|---|---|
 | CONTROL_T1  | control    | SRX22561044 | SRR26866493 | 32,249,245 |
-| CONTROL_T7  | control    | SRX22561051 | SRR26866486 | 54,071,313 |
 | CONTROL_T16 | control    | SRX22561045 | SRR26866492 | 40,128,609 |
 | IVM_T3      | ivermectin | SRX22561053 | SRR26866484 | 22,121,380 |
 | IVM_T4      | ivermectin | SRX22561054 | SRR26866483 | 17,179,802 |
-| IVM_T16     | ivermectin | SRX22561052 | SRR26866485 | 26,457,311 |
 
 (All six fall under NCBI SRA study **SRP472648** / BioProject
 **PRJNA1041894**.)
@@ -133,9 +115,9 @@ paper's Table 1 exactly, confirming correct sample identity:
 ## Methods (as you'd write it up)
 
 **Data.** Public paired-end RNA-seq reads (2x75bp, Illumina NextSeq 550)
-for *T. canis* hatched third-stage larvae, untreated (control, n=3
+for *T. canis* hatched third-stage larvae, untreated (control, n=2
 biological replicates) or treated *in vitro* with 10 uM ivermectin
-(n=3 biological replicates) for 12 hours, were obtained from NCBI SRA
+(n=2 biological replicates) for 12 hours, were obtained from NCBI SRA
 (study SRP472648) under BioProject PRJNA1041894 (Quintana et al., 2025).
 The *T. canis* reference CDS transcriptome (genome assembly PRJNA248777,
 WormBase ParaSite release WBPS19) was used as the quantification
