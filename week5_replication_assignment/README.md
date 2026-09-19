@@ -12,7 +12,7 @@ research in veterinary parasitology.
 1. Downloads the *T. canis* reference CDS transcriptome from WormBase
    ParaSite (genome assembly PRJNA248777, release WBPS19 -- the same
    assembly used by the source study).
-2. Downloads 6 raw paired-end RNA-seq runs (3 control + 3
+2. Downloads 4 of the 6 raw paired-end RNA-seq runs (2 control + 2
    ivermectin-treated biological replicates) from NCBI SRA, BioProject
    **PRJNA1041894** / study **SRP472648** (Quintana, Brewer & Jesudoss
    Chelladurai, 2025, *Int J Parasitol Drugs Drug Resist* 29:100614,
