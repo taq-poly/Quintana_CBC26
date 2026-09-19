@@ -60,7 +60,7 @@ machine's core count if you want to try adjusting it (default: 4).
 - Internet access to: `ftp.ebi.ac.uk` (reference), NCBI SRA
   (`prefetch`, `fasterq-dump`)
 - ~4 CPU cores
-- **~30 GB free disk** (full-depth paired-end downloads for 6 samples)
+- **~15 GB free disk** (full-depth paired-end downloads for 4 samples)
 - **No GPU required**
 
 Create and activate the environment:
@@ -189,7 +189,7 @@ table: one row per transcript, with `baseMean`, `log2FoldChange`
 
 ## Caveats
 
-- n=3 per group is a modest sample size for DE testing (typical of
+- n=2 per group (subset from the original study's n=3) is a small sample size for DE testing (typical of
   in vitro drug-exposure studies of this kind), which limits
   statistical power for detecting smaller-effect-size genes.
 - Transcript-level (not gene-collapsed) DE testing is used for
