@@ -7,6 +7,33 @@ anthelmintic, and understanding how *T. canis* larvae respond
 transcriptionally to it is directly relevant to drug tolerance/resistance
 research in veterinary parasitology.
 
+## Results
+
+Comparing ivermectin-treated vs. control *T. canis* third-stage larvae
+(n=2 biological replicates per group, full read depth):
+
+- **15,529 transcripts tested**
+- **215 significantly differentially expressed** (padj < 0.05, |log2FC| > 1)
+
+![PCA plot](results_deseq2/pca.png)
+
+*PCA of variance-stabilized counts. Ivermectin and control samples
+separate along the primary axis of variation.*
+
+![Volcano plot](results_deseq2/volcano.png)
+
+*Volcano plot of all tested transcripts; red points meet the
+significance and fold-change thresholds above.*
+
+![Sample distance heatmap](results_deseq2/sample_distance_heatmap.png)
+
+*Sample-to-sample distance heatmap (darker = more similar), based on
+variance-stabilized counts.*
+
+Full results tables: [`results_deseq2/DE_ivermectin_vs_control.csv`](results_deseq2/DE_ivermectin_vs_control.csv)
+(all transcripts) and [`results_deseq2/DE_ivermectin_vs_control_significant.csv`](results_deseq2/DE_ivermectin_vs_control_significant.csv)
+(significant hits only). QC report: [`multiqc_report.html`](multiqc_report.html).
+
 ## What this run does
 
 1. Downloads the *T. canis* reference CDS transcriptome from WormBase
