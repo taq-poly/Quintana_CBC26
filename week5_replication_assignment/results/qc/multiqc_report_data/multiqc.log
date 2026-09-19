@@ -1,0 +1,25 @@
+[2026-09-19 14:23:11,761] multiqc                                            [DEBUG  ]  This is MultiQC v1.21
+[2026-09-19 14:23:11,761] multiqc                                            [DEBUG  ]  Command used: /home/there/miniconda3/envs/dimmitis-deg/bin/multiqc results/qc -o results/qc -n multiqc_report
+[2026-09-19 14:23:12,930] multiqc                                            [WARNING]  MultiQC Version v1.35 now available!
+[2026-09-19 14:23:12,930] multiqc                                            [DEBUG  ]  Latest MultiQC version is v1.35, released 2026-05-13
+[2026-09-19 14:23:12,930] multiqc                                            [DEBUG  ]  Working dir : /home/there/dimmitis-tissue-deg
+[2026-09-19 14:23:12,930] multiqc                                            [DEBUG  ]  Template    : default
+[2026-09-19 14:23:12,930] multiqc                                            [DEBUG  ]  Running Python 3.11.9 | packaged by conda-forge | (main, Apr 19 2024, 18:36:13) [GCC 12.3.0]
+[2026-09-19 14:23:12,931] multiqc                                            [DEBUG  ]  Analysing modules: custom_content, ccs, ngsderive, purple, conpair, isoseq, lima, peddy, somalier, methylqa, mosdepth, phantompeakqualtools, qualimap, bamdst, preseq, hifiasm, quast, qorts, rna_seqc, rockhopper, rsem, rseqc, busco, bustools, goleft_indexcov, gffcompare, disambiguate, supernova, deeptools, sargasso, verifybamid, mirtrace, happy, mirtop, sambamba, gopeaks, homer, hops, macs2, theta2, snpeff, gatk, htseq, bcftools, featureCounts, fgbio, dragen, dragen_fastqc, dedup, pbmarkdup, damageprofiler, mapdamage, biobambam2, jcvi, mtnucratio, picard, vep, bakta, prokka, qc3C, nanostat, samblaster, samtools, sexdeterrmine, seqera_cli, eigenstratdatabasetools, bamtools, jellyfish, vcftools, longranger, stacks, varscan2, snippy, umitools, truvari, megahit, bbmap, bismark, biscuit, diamond, hicexplorer, hicup, hicpro, salmon, kallisto, slamdunk, star, hisat2, tophat, bowtie2, bowtie1, cellranger, snpsplit, odgi, pangolin, nextclade, freyja, humid, kat, leehom, librarian, nonpareil, adapterRemoval, bbduk, clipandmerge, cutadapt, flexbar, sourmash, kaiju, bracken, kraken, malt, motus, trimmomatic, sickle, skewer, sortmerna, biobloomtools, fastq_screen, afterqc, fastp, fastqc, filtlong, prinseqplusplus, pychopper, porechop, pycoqc, minionqc, anglerfish, multivcfanalyzer, clusterflow, checkqc, bcl2fastq, bclconvert, interop, ivar, flash, seqyclean, optitype, whatshap, spaceranger, xenome, xengsort, metaphlan, seqwho
+[2026-09-19 14:23:12,940] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmp5uaf1evr
+[2026-09-19 14:23:12,946] multiqc                                            [INFO   ]  Search path : /home/there/dimmitis-tissue-deg/results/qc
+[2026-09-19 14:23:13,053] multiqc                                            [DEBUG  ]  Summary of files that were skipped by the search: [skipped_module_specific_max_filesize: 52] // [skipped_no_match: 4]
+[2026-09-19 14:23:13,177] multiqc                                            [DEBUG  ]  No samples found: custom_content
+[2026-09-19 14:23:13,190] multiqc.modules.fastqc.fastqc                      [INFO   ]  Found 4 reports
+[2026-09-19 14:23:13,191] multiqc.utils.util_functions                       [DEBUG  ]  Wrote data file multiqc_fastqc.txt
+[2026-09-19 14:23:13,375] multiqc.plots.plotly.heatmap                       [DEBUG  ]  Heatmap size: 450x320, px per element: 45.00x80.00
+[2026-09-19 14:23:13,381] multiqc.utils.software_versions                    [DEBUG  ]  Reading software versions from config.software_versions
+[2026-09-19 14:23:13,383] multiqc.utils.util_functions                       [DEBUG  ]  Wrote data file multiqc_software_versions.txt
+[2026-09-19 14:23:13,393] multiqc.utils.util_functions                       [DEBUG  ]  Wrote data file multiqc_general_stats.txt
+[2026-09-19 14:23:13,394] multiqc                                            [DEBUG  ]  Compressing plot data
+[2026-09-19 14:23:13,453] multiqc.utils.util_functions                       [DEBUG  ]  Wrote data file multiqc_data.json
+[2026-09-19 14:23:13,453] multiqc                                            [INFO   ]  Report      : results/qc/multiqc_report.html
+[2026-09-19 14:23:13,453] multiqc                                            [INFO   ]  Data        : results/qc/multiqc_report_data
+[2026-09-19 14:23:13,453] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmp5uaf1evr/multiqc_data' to '/home/there/dimmitis-tissue-deg/results/qc/multiqc_report_data'
+[2026-09-19 14:23:13,455] multiqc                                            [DEBUG  ]  Full report path: /home/there/dimmitis-tissue-deg/results/qc/multiqc_report.html
+[2026-09-19 14:23:13,627] multiqc                                            [INFO   ]  MultiQC complete

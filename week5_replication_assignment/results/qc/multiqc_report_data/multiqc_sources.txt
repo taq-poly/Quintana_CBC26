@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	FBW2	/home/there/dimmitis-tissue-deg/results/qc/FBW2_fastqc.zip
+FastQC	all_sections	FBW1	/home/there/dimmitis-tissue-deg/results/qc/FBW1_fastqc.zip
+FastQC	all_sections	FU2	/home/there/dimmitis-tissue-deg/results/qc/FU2_fastqc.zip
+FastQC	all_sections	FU1	/home/there/dimmitis-tissue-deg/results/qc/FU1_fastqc.zip
