@@ -1,0 +1,15 @@
+seq_name	length	topology	coordinates	n_genes	genetic_code	virus_score	fdr	n_hallmarks	marker_enrichment	taxonomy
+k79_4607	2110	No terminal repeats	NA	1	11	0.9711	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_7210	2731	No terminal repeats	NA	2	11	0.9626	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_3866	708	No terminal repeats	NA	1	11	0.9601	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_3367	6986	No terminal repeats	NA	2	11	0.9583	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_8473	2478	No terminal repeats	NA	2	11	0.9518	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_3298	681	No terminal repeats	NA	1	11	0.9365	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_250	5855	No terminal repeats	NA	2	11	0.9302	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_3007	3200	No terminal repeats	NA	1	11	0.9165	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Kitrinoviricota;Flasuviricetes;Amarillovirales;Flaviviridae
+k79_5503	7136	No terminal repeats	NA	2	11	0.8543	NA	1	1.7183	Viruses;Riboviria;Orthornavirae;Duplornaviricota;Chrymotiviricetes;Ghabrivirales;
+k79_59	2855	No terminal repeats	NA	1	11	0.7667	NA	0	0.0000	Unclassified
+k79_3984	3321	No terminal repeats	NA	1	11	0.7506	NA	0	0.0000	Unclassified
+k79_182	2826	No terminal repeats	NA	1	11	0.7475	NA	0	0.0000	Unclassified
+k79_7786	2687	No terminal repeats	NA	1	11	0.7460	NA	0	0.0000	Unclassified
+k79_3200	3152	No terminal repeats	NA	2	11	0.7402	NA	0	0.0000	Unclassified

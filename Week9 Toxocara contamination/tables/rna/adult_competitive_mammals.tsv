@@ -1,0 +1,13 @@
+sample	target	read_pairs	ppm_trimmed	mt_read_pairs	distinct_loci_1kb
+F_T1	dog	147	5.52	0	79
+F_T1	human	497	18.65	0	372
+F_T2	dog	13	0.47	0	13
+F_T2	human	722	26.12	0	464
+F_T3	dog	5	0.17	0	7
+F_T3	human	249	8.61	0	229
+M_T10	dog	52	2.01	0	29
+M_T10	human	1150	44.51	0	524
+M_T4	dog	324	10.76	0	100
+M_T4	human	2046	67.97	0	687
+M_T6	dog	43	1.45	0	38
+M_T6	human	236	7.95	0	183

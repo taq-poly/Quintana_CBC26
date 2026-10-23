@@ -1,0 +1,15 @@
+contig_id	contig_length	provirus	proviral_length	gene_count	viral_genes	host_genes	checkv_quality	miuvig_quality	completeness	completeness_method	contamination	kmer_freq	warnings
+k79_3298	681	No	NA	1	1	0	Low-quality	Genome-fragment	8.48	HMM-based (lower-bound)	0.0	1.0	
+k79_59	2855	No	NA	1	0	0	Not-determined	Genome-fragment	NA	NA	0.0	1.0	no viral genes detected
+k79_5503	7136	No	NA	2	1	0	Medium-quality	Genome-fragment	78.36	HMM-based (lower-bound)	0.0	1.0	
+k79_8473	2478	No	NA	2	1	0	Low-quality	Genome-fragment	30.85	HMM-based (lower-bound)	0.0	1.0	
+k79_3367	6986	No	NA	2	1	0	Medium-quality	Genome-fragment	76.71	HMM-based (lower-bound)	0.0	1.0	
+k79_3007	3200	No	NA	1	1	0	Low-quality	Genome-fragment	29.0	AAI-based (medium-confidence)	0.0	1.0	
+k79_7786	2687	No	NA	1	0	0	Not-determined	Genome-fragment	NA	NA	0.0	1.0	no viral genes detected
+k79_182	2826	No	NA	1	1	0	Low-quality	Genome-fragment	25.55	HMM-based (lower-bound)	0.0	1.0	
+k79_3866	708	No	NA	1	1	0	Low-quality	Genome-fragment	8.81	HMM-based (lower-bound)	0.0	1.0	
+k79_4607	2110	No	NA	1	1	0	Low-quality	Genome-fragment	35.75	AAI-based (medium-confidence)	0.0	1.0	
+k79_250	5855	No	NA	2	1	0	Medium-quality	Genome-fragment	64.29	HMM-based (lower-bound)	0.0	1.0	
+k79_3200	3152	No	NA	2	0	0	Not-determined	Genome-fragment	NA	NA	0.0	1.0	no viral genes detected
+k79_7210	2731	No	NA	2	1	0	Low-quality	Genome-fragment	34.0	HMM-based (lower-bound)	0.0	1.0	
+k79_3984	3321	No	NA	1	0	0	Not-determined	Genome-fragment	NA	NA	0.0	1.0	no viral genes detected

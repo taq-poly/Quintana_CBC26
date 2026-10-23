@@ -1,0 +1,12 @@
+category	read_pairs
+worm	223666
+microbes	220975
+unassigned_low_score	8657
+dog	2693
+human	1857
+ambiguous_dog/human	428
+ambiguous_human/microbes	87
+ambiguous_dog/microbes	57
+ambiguous_microbes/worm	20
+ambiguous_human/worm	19
+ambiguous_dog/worm	12
